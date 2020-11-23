@@ -5,14 +5,14 @@ import java.util.*
 import javax.net.ssl.HttpsURLConnection
 
 object ConnectionUtils {
+
     fun requestRawJsonFrom(url: String, catch: (Exception) -> Unit = { it.printStackTrace() }): String? {
-        return runConnection(url, {
-            it.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
-            it.requestMethod = "GET"
-            it.inputStream.run {
-                val scanner = Scanner(this).useDelimiter("\\A")
+        return runConnection(url, { connection ->
+            connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+            connection.requestMethod = "GET"
+            connection.inputStream.use {
+                val scanner = Scanner(it).useDelimiter("\\A")
                 val response = if (scanner.hasNext()) scanner.next() else null
-                this.close()
                 if (response?.isNotBlank() == true) response else null
             }
         }, catch)
@@ -32,4 +32,5 @@ object ConnectionUtils {
             }
         }
     }
+
 }
