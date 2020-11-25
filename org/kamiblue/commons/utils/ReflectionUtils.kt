@@ -75,8 +75,6 @@ object ReflectionUtils {
         null
     }
 
-    inline fun <reified T> Class<out T>.getInstance(): T {
-        return this.getDeclaredField("INSTANCE")[null] as T
-    }
+    inline val <reified T> Class<out T>.instance : T get() = this.getDeclaredField("INSTANCE")[null] as T
 
 }
