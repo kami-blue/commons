@@ -30,6 +30,10 @@ object MathUtils {
         return round(value * scale) / scale
     }
 
+    fun decimalPlaces(value: Double) = value.toString().split('.').getOrElse(1) { "0" }.length
+
+    fun decimalPlaces(value: Float) = value.toString().split('.').getOrElse(1) { "0" }.length
+
     fun isNumberEven(i: Int): Boolean {
         return i and 1 == 0
     }
