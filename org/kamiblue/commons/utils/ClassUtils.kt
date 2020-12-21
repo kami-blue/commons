@@ -3,8 +3,16 @@ package org.kamiblue.commons.utils
 import org.reflections.Reflections
 
 object ClassUtils {
+
     fun <T> findClasses(pack: String, subType: Class<T>): List<Class<out T>> {
         val reflections = Reflections(pack)
+
+        return reflections.getSubTypesOf(subType).sortedBy { it.simpleName }
+    }
+
+    fun <T> findClassesByClassLoader(classLoader: ClassLoader, subType: Class<T>): List<Class<out T>> {
+        val reflections = Reflections(classLoader)
+
         return reflections.getSubTypesOf(subType).sortedBy { it.simpleName }
     }
 
