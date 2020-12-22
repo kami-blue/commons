@@ -10,7 +10,7 @@ open class NameableSet<T : Nameable> : AbstractMutableSet<T>() {
     override val size get() = map.size
 
     override fun contains(element: T): Boolean {
-        return map.contains(element.name.toLowerCase())
+        return map.containsKey(element.name.toLowerCase())
     }
 
     override fun containsAll(elements: Collection<T>): Boolean {
