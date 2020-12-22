@@ -6,8 +6,10 @@ class AliasSet<T : Alias> : NameableSet<T>() {
 
     override fun add(element: T): Boolean {
         var modified = super.add(element)
-        element.alias.forEach {
-            modified = map.put(it.toLowerCase(), element) == null || modified
+        element.alias.forEach { alias ->
+            val prevValue = map.put(alias.toLowerCase(), element)
+            prevValue?.let { remove(it) }
+            modified = prevValue == null || modified
         }
         return modified
     }
