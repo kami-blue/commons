@@ -23,3 +23,6 @@ fun String.surroundedBy(prefix: CharSequence, suffix: CharSequence, ignoreCase: 
 
 fun String.surroundedBy(prefix: Char, suffix: Char, ignoreCase: Boolean = false) =
     this.startsWith(prefix, ignoreCase) && this.endsWith(suffix, ignoreCase)
+
+fun String.mapEach(vararg delimiters: Char, transformer: (String) -> String) =
+    split(*delimiters).map(transformer)
