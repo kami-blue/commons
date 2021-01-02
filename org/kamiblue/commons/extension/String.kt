@@ -26,3 +26,13 @@ fun String.surroundedBy(prefix: Char, suffix: Char, ignoreCase: Boolean = false)
 
 fun String.mapEach(vararg delimiters: Char, transformer: (String) -> String) =
     split(*delimiters).map(transformer)
+
+fun String.replaceAll(replacement: String, vararg regexes: Regex): String {
+    regexes.forEach {
+        if (it.matches(this)) {
+            return this.replace(it, replacement)
+        }
+    }
+
+    return this
+}
