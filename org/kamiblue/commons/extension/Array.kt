@@ -1,11 +1,10 @@
 package org.kamiblue.commons.extension
 
-import java.util.Arrays
+import java.util.*
 import java.util.stream.DoubleStream
 import java.util.stream.IntStream
 import java.util.stream.LongStream
 import java.util.stream.Stream
-import kotlin.random.Random
 
 fun BooleanArray.stream(): Stream<Boolean> = Arrays.stream(this.toTypedArray())
 
@@ -25,9 +24,11 @@ fun CharArray.stream(): Stream<Char> = Arrays.stream(this.toTypedArray())
 
 fun <T> Array<out T>.stream(): Stream<T> = Arrays.stream(this)
 
-fun CharArray.random(amount: Int) = (1..amount)
-    .map { Random.nextInt(0, this.size) }
-    .map(this::get)
-    .joinToString("")
+fun CharArray.random(amount: Int) = StringBuilder(amount).let {
+    for (i in 1..amount) {
+        it.append(this.random())
+    }
+    toString()
+}
 
 fun CharArray.remove(char: Char) = this.filter { it != char }.toCharArray()
