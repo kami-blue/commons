@@ -23,12 +23,3 @@ fun DoubleArray.stream(): DoubleStream = Arrays.stream(this)
 fun CharArray.stream(): Stream<Char> = Arrays.stream(this.toTypedArray())
 
 fun <T> Array<out T>.stream(): Stream<T> = Arrays.stream(this)
-
-fun CharArray.random(amount: Int) = StringBuilder(amount).let {
-    for (i in 1..amount) {
-        it.append(this.random())
-    }
-    toString()
-}
-
-fun CharArray.remove(char: Char) = this.filter { it != char }.toCharArray()
