@@ -25,7 +25,7 @@ open class NameableSet<T : Nameable> : AbstractMutableSet<T>() {
 
     override fun iterator() = map.values.iterator()
 
-    operator fun get(name: String?) = map[name?.toLowerCase()]
+    operator fun get(name: String) = map[name.toLowerCase()]
 
     fun getOrPut(name: String, value: () -> T) = get(name) ?: value().also { add(it) }
 
