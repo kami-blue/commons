@@ -8,6 +8,7 @@ import kotlin.math.sqrt
 /* Vec2i */
 
 typealias Vec2i = Vec2<Int>
+val VEC2I_ZERO = Vec2i(0, 0)
 
 // Addition (+)
 infix operator fun Vec2i.plus(other: Vec2i) = add(other)
@@ -47,6 +48,7 @@ fun Vec2i.length() = sqrt(lengthSq().toDouble())
 /* Vec3i */
 
 typealias Vec3i = Vec3<Int>
+val VEC3I_ZERO = Vec3i(0, 0, 0)
 
 // Addition (+)
 infix operator fun Vec3i.plus(other: Vec3i) = add(other)
@@ -86,6 +88,7 @@ fun Vec3i.length() = sqrt(lengthSq().toDouble())
 /* Vec4i */
 
 typealias Vec4i = Vec4<Int>
+val VEC4I_ZERO = Vec4i(0, 0, 0, 0)
 
 // Addition (+)
 infix operator fun Vec4i.plus(other: Vec4i) = add(other)
