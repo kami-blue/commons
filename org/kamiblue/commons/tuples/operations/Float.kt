@@ -42,6 +42,10 @@ fun Vec2f.divide(first: Float, second: Float) = Vec2f(this.first / first, this.s
 fun Vec2f.lengthSq() = first * first + second * second
 fun Vec2f.length() = sqrt(lengthSq())
 
+// Conversion
+fun Vec2f.toInt() = Vec2i(first.toInt(), second.toInt())
+fun Vec2f.toDouble() = Vec2d(first.toDouble(), second.toDouble())
+
 /* End of Vec2f */
 
 
@@ -82,6 +86,11 @@ fun Vec3f.divide(first: Float, second: Float, third: Float) = Vec3f(this.first /
 fun Vec3f.lengthSq() = first * first + second * second + third * third
 fun Vec3f.length() = sqrt(lengthSq())
 
+// Conversion
+fun Vec3f.toInt() = Vec3i(first.toInt(), second.toInt(), third.toInt())
+fun Vec3f.toFloat() = Vec3f(first.toFloat(), second.toFloat(), third.toFloat())
+fun Vec3f.toDouble() = Vec3d(first.toDouble(), second.toDouble(), third.toDouble())
+
 /* End of Vec3f */
 
 
@@ -119,7 +128,11 @@ infix fun Vec4f.divide(other: Float) = divide(other, other, other, other)
 fun Vec4f.divide(first: Float, second: Float, third: Float, fourth: Float) = Vec4f(this.first / first, this.second / second, this.third - third, this.fourth + fourth)
 
 // Other
-fun Vec4f.lengthSq() = first * first + second * second + third * third
+fun Vec4f.lengthSq() = first * first + second * second + third * third + fourth * fourth
 fun Vec4f.length() = sqrt(lengthSq())
+
+// Conversion
+fun Vec4f.toInt() = Vec4i(first.toInt(), second.toInt(), third.toInt(), fourth.toInt())
+fun Vec4f.toDouble() = Vec4d(first.toDouble(), second.toDouble(), third.toDouble(), fourth.toDouble())
 
 /* End of Vec4f */
