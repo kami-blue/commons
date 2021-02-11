@@ -3,9 +3,9 @@ package org.kamiblue.commons.collections
 import org.kamiblue.commons.interfaces.Nameable
 import java.util.concurrent.ConcurrentHashMap
 
-open class NameableSet<T : Nameable> : AbstractMutableSet<T>() {
-
-    protected val map = ConcurrentHashMap<String, T>()
+open class NameableSet<T : Nameable>(
+    protected val map: MutableMap<String, T> = ConcurrentHashMap()
+) : AbstractMutableSet<T>() {
 
     override val size get() = map.size
 

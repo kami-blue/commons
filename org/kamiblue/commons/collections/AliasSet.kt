@@ -1,8 +1,11 @@
 package org.kamiblue.commons.collections
 
 import org.kamiblue.commons.interfaces.Alias
+import java.util.concurrent.ConcurrentHashMap
 
-class AliasSet<T : Alias> : NameableSet<T>() {
+class AliasSet<T : Alias>(
+    map: MutableMap<String, T> = ConcurrentHashMap()
+) : NameableSet<T>(map) {
 
     override fun add(element: T): Boolean {
         var modified = super.add(element)
