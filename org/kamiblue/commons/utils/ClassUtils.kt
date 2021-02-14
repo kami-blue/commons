@@ -4,19 +4,25 @@ import org.reflections.Reflections
 
 object ClassUtils {
 
-    fun <T> findClasses(pack: String, subType: Class<T>): List<Class<out T>> {
-        val reflections = Reflections(pack)
-
-        return reflections.getSubTypesOf(subType).sortedBy { it.simpleName }
+    inline fun <reified T> findClasses(
+        pack: String,
+        noinline block: Sequence<Class<out T>>.() -> Sequence<Class<out T>> = { this }
+    ): List<Class<out T>> {
+        return findClasses(pack, T::class.java, block)
     }
 
-    fun <T> findClassesByClassLoader(classLoader: ClassLoader, subType: Class<T>): List<Class<out T>> {
-        val reflections = Reflections(classLoader)
-
-        return reflections.getSubTypesOf(subType).sortedBy { it.simpleName }
+    fun <T> findClasses(
+        pack: String,
+        subType: Class<T>,
+        block: Sequence<Class<out T>>.() -> Sequence<Class<out T>> = { this }
+    ): List<Class<out T>> {
+        return Reflections(pack).getSubTypesOf(subType).asSequence()
+            .run(block)
+            .sortedBy { it.simpleName }
+            .toList()
     }
 
-    inline fun <reified T> getInstance(clazz: Class<out T>): T {
-        return clazz.getDeclaredField("INSTANCE")[null] as T
-    }
+    @Suppress("UNCHECKED_CAST")
+    val <T> Class<out T>.instance
+        get() = this.getDeclaredField("INSTANCE")[null] as T
 }
