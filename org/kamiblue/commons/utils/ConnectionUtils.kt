@@ -10,11 +10,7 @@ object ConnectionUtils {
         return runConnection(url, { connection ->
             connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
             connection.requestMethod = "GET"
-            connection.inputStream.use {
-                val scanner = Scanner(it).useDelimiter("\\A")
-                val response = if (scanner.hasNext()) scanner.next() else null
-                if (response?.isNotBlank() == true) response else null
-            }
+            connection.inputStream.readBytes().toString(Charsets.UTF_8)
         }, catch)
     }
 

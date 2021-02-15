@@ -1,20 +1,18 @@
 package org.kamiblue.commons.extension
 
 /**
- * Eg, "house".max(4) will return "hous"
- * @return [this] with the length limited to [max]
+ * Limit the length of this string to [max]
  */
 fun String.max(max: Int) = this.substring(0, this.length.coerceAtMost(max))
 
 /**
- * Eg, "house".max(4, "error") will return "erro"
- * @return [this.max] with a message appended
+ * Limit the length to this string [max] with [suffix] appended
  */
 fun String.max(max: Int, suffix: String): String {
-    return if (length > max) {
-        (max(max - suffix.length) + suffix).max(max)
+    return if (this.length > max) {
+        this.max(max - suffix.length) + suffix
     } else {
-        max(max)
+        this.max(max)
     }
 }
 
