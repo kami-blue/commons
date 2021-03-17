@@ -7,13 +7,13 @@ import java.awt.datatransfer.StringSelection
 
 object SystemUtils {
 
-    fun copyToClipboard(text: String) {
+    fun setClipboard(text: String) {
         val selection = StringSelection(text)
         val clipboard: Clipboard = Toolkit.getDefaultToolkit().systemClipboard
-        clipboard.setContents(selection, selection)
+        clipboard.setContents(selection, null)
     }
 
-    fun copyFromClipboard(): String? {
+    fun getClipboard(): String? {
         val clipboard: Clipboard = Toolkit.getDefaultToolkit().systemClipboard
         return try {
             clipboard.getData(DataFlavor.stringFlavor)?.toString()
